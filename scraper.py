@@ -30,7 +30,7 @@ def download(url):
     try:
         print(f"downloading {url}")
         (air_time, data) = get_ld_json(url)
-        filename = f"{air_time}-{data['headline']}".replace(":", ".") + ".mp4"
+        filename = f"Swissdinner-{air_time}-{data['headline'].strip()}".replace(":", ".") + ".mp4"
 
         command = f"youtube-dl -o /output/'{filename}' {data['video']['contentUrl']}"
         print(command)
