@@ -1,5 +1,5 @@
 import json
-import os
+import subprocess
 import requests
 from dateutil.parser import parse
 from bs4 import BeautifulSoup
@@ -31,9 +31,9 @@ def download(url):
         print(f"downloading {url}")
         (air_time, data) = get_ld_json(url)
         filename = f"Swissdinner-{air_time}-{data['headline'].strip()}".replace(":", ".") + ".mp4"
-        command = f"youtube-dl -o /output/'{filename}' {data['video']['contentUrl']}"
+        command = ["youtube-dl", "-o", f"{args.destination}{filename}", data['video']['contentUrl']]
         print(command)
-        os.system(command)
+        subprocess.Popen(command)
     except Exception as e:
         print(e)
 
@@ -61,6 +61,8 @@ parser.add_argument(
     '--url', help='Direct url to crawl e.g. https://tv.telezueri.ch/swissdinner/heute-kocht-david-36-145058857')
 parser.add_argument(
     '--sitemap', default="https://tv.telezueri.ch/sitemap.xml", help='Sitemap to crawl (default)')
+parser.add_argument(
+    '--destination', default="/output/", help='Destination to save to (default docker /output/)')
 
 args = parser.parse_args()
 print(banner)

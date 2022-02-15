@@ -13,10 +13,11 @@ usage: scraper.py [-h] [--url URL] [--sitemap SITEMAP]
         Download SwissDinner Episodes
 
 optional arguments:
-  -h, --help         show this help message and exit
-  --url URL          Direct url to crawl e.g. https://www.telezueri.ch/swissdinner/swissdinner-spezial-mit-
-                     michael-imfeld-51-141932031
-  --sitemap SITEMAP  Sitemap to crawl
+  -h, --help            show this help message and exit
+  --url URL             Direct url to crawl e.g. https://tv.telezueri.ch/swissdinner/heute-kocht-david-36-145058857
+  --sitemap SITEMAP     Sitemap to crawl (default)
+  --destination DESTINATION
+                        Destination to save to (default docker /output/)
 ```
 
 ## Run
