@@ -31,7 +31,6 @@ def download(url):
         print(f"downloading {url}")
         (air_time, data) = get_ld_json(url)
         filename = f"Swissdinner-{air_time}-{data['headline'].strip()}".replace(":", ".") + ".mp4"
-
         command = f"youtube-dl -o /output/'{filename}' {data['video']['contentUrl']}"
         print(command)
         os.system(command)
@@ -42,7 +41,7 @@ def fetch_sitemap(sitemap):
     sitemap_tree = sitemap_tree_for_homepage(sitemap)
 
     for page in sitemap_tree.all_pages():
-        if page.url.startswith("https://www.telezueri.ch/swissdinner"):
+        if page.url.startswith("https://tv.telezueri.ch/swissdinner"):
             download(page.url)
 
 
@@ -59,9 +58,9 @@ banner = """\033[0;31m
 
 parser = argparse.ArgumentParser(description=banner, formatter_class=argparse.RawDescriptionHelpFormatter)
 parser.add_argument(
-    '--url', help='Direct url to crawl e.g. https://www.telezueri.ch/swissdinner/swissdinner-spezial-mit-michael-imfeld-51-141932031')
+    '--url', help='Direct url to crawl e.g. https://tv.telezueri.ch/swissdinner/heute-kocht-david-36-145058857')
 parser.add_argument(
-    '--sitemap', default="https://www.telezueri.ch/sitemap.xml", help='Sitemap to crawl (default)')
+    '--sitemap', default="https://tv.telezueri.ch/sitemap.xml", help='Sitemap to crawl (default)')
 
 args = parser.parse_args()
 print(banner)
